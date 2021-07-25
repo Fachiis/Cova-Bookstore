@@ -1,0 +1,80 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Bookstore{% endblock title %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {{ form.media.css }}
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-inverse" style="border: 0px; margin-bottom: 0px; border-radius: 0px;">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+                <a class="navbar-brand" style="color: aqua" href="{% url 'home' %}"><b>Cova-Bookstore</b></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'book_list' %}"><span class="glyphicon glyphicon-book"></span> Books</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                <li><a href="{% url 'account_change_password' %}"><span class="glyphicon glyphicon-edit"></span> Change Password</a></li>
+              {% else %}
+                <li><a href="{% url 'account_signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              {% endif %}
+                  <li>
+                    <form method="get" action="{% url 'search_result' %}" class="form-inline mt-2 mt-md-0 search-form">
+                        <div class="input-group">
+                            <input name="q" type="text" placeholder="Search.." aria-label="Search" class="form-control input-form mr-sm-2" style="border-radius: 12px;" />
+                        </div>
+                    </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
+     <footer style="text-align: center; margin-top: 20px;">
+        <div>
+            <span>&copy; {% now "Y" %} Cova-Bookstore </span>
+            <span>Created by <a href="https://fachiis.github.io/Fachiis_/">Fachiis</a></span>
+        </div>
+        <div>
+            <nav class="nav">
+                <a href="#" class="nav-link">Licenses</a>
+            </nav>
+        </div>
+    </footer>
+    <script src="{% static 'js/base.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/9fab4ea221.js" crossorigin="anonymous"></script>
+    <script>
+        function upload_img(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img_id').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            };
+        };
+    </script>
+    {{ form.media.js }}
+</body>
+</html>

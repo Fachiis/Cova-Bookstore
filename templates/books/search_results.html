@@ -1,0 +1,21 @@
+{% extends '_base.html' %}
+
+{% block title %}Books{% endblock title %}
+
+{% block content %}
+<div class="col2 col">
+    <h2>Search Results</h2>
+    <table class="instructions" style="margin-top: 13px">
+        {% for book in book_list %}
+        <tr>
+            <td><p class="number">*</p></td>
+            <td class="instruction_step"><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
+        </tr>
+        {% empty %}
+            <tr>
+                <td style="color: red;">No matching results found</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <br /><br />
+        <div class="jumbotron" style="background-image: url(static/images/book.jpg); margin-bottom: 0px;">
+            <div class="overlay"></div>
+            <div class="container rounded p-3" style="color: bisque;">
+                <h1 class="display-3">Welcome &#128522;</h1>
+                <p class="lead">Cova-Bookstore is super-glad to have you, <strong>We're here to serve you greatly!</strong>.</p>
+                <p><a target="_self" class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more &raquo;</a></p>
+            </div>
+        </div>
+    {% else %}
+        <h1 style="text-align: center;">You are not logged in &#128543;</h1>
+    {% endif %}
+{% endblock content %}

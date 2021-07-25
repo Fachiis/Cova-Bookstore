@@ -1,0 +1,21 @@
+{% load account %}
+{% user_display user as user_display %}
+{% load i18n %}
+{% autoescape off %}
+    {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+    Hi {{ user_display }},
+
+    Your new account in the Cova-Bookstore has been created. Welcome to Cova-Bookstore! 
+
+    To confirm your new account, please click or go to {{ activate_url }}.
+    In most mail programs, this should appear as a blue link which you can click on. 
+    If that doesn't work, then cut and paste the address into the address line at the top of your web browser window.
+
+    If you require assistance, please email us at covabookstore@gmail.com
+    {% endblocktrans %}
+{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain%}
+    Welcome to {{ site_name }}!
+    Our best,
+    Cova-Bookstore team
+{% endblocktrans %}

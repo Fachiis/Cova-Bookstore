@@ -1,0 +1,68 @@
+{% extends '_base.html' %}
+
+{% block title %}{{ book.title }}{% endblock title %}
+
+{% block content %}
+<div class="book_detail">
+    <div class="col2 col">
+        <h2>{{ book.title }}</h2>
+        {% if user.email == book.uploader.email %}
+        <div style="margin-bottom: 10px;">
+            <span style="margin-left: 5px;"><small><a href="{% url 'book_delete' book.pk %}"><i class="fa fa-trash"
+                                                                      aria-hidden="true"
+                                                                      style="color: red;"></i></a></small></span>
+            <span style="margin-left: 10px;"><small><a href="{% url 'book_edit' book.pk %}" style="color: aqua;"><i
+                    class="fas fa-edit"></i></a></small></span>
+        </div>
+        {% endif %}
+        {% if book.cover %}
+        <img src="{{ book.cover.url }}"
+             style="margin-bottom: 15px; width:25%; border-radius: 20px; margin-left: 28px;"/>
+        {% endif %}
+        <ul>
+            <li>Author: {{ book.author }}</li>
+            <li>Price: &#x20A6;{{ book.price }}</li>
+        </ul>
+        <form class="payment">
+          <script src="https://js.paystack.co/v1/inline.js"></script>
+          <button type="button" onclick="payWithPaystack()" class="btn btn-primary payment">Purchase</button>
+        </form>
+    </div>
+    <div>
+        <h4 style="margin-left: 28px;">Reviews</h4>
+        <ul style="margin-left: 28px;">
+            {% for review in book.reviews.all %}
+            <li>{{ review.review }} <b>({{ review.author }})</b></li>
+            {% empty %}
+            <li>No reviews</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'book_review' book.pk %}"><b style="color: blue; margin-left: 55px;">+</b> Add your review</a>
+        <script>
+          function payWithPaystack(){
+            var handler = PaystackPop.setup({
+              key: 'pk_test_fc2bac4f965d2af61ee57d3ca669f63e479bb62c',
+              email: '{{ user.email }}',
+              amount: {{ book.price }} * 100.00,
+              currency: 'NGN',
+              metadata: {
+                 custom_fields: [
+                    {
+                        display_name: "Mobile Number",
+                        variable_name: "mobile_number",
+                    }
+                 ]
+              },
+              callback: function(response) {
+                window.location = "http://127.0.0.1:8000/charge?reference=" + response.reference;
+              },
+              onClose: function(){
+                  alert('window closed');
+              }
+            });
+            handler.openIframe();
+          }
+        </script>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+# Docker version
+version: '3.7'
+
+services:
+  web:
+    build: .
+    command: gunicorn bookstore_project.wsgi -b 0.0.0.0:8000
+    environment:
+      - ENVIRONMENT=production
+      - SECRET_KEY=^&sstl4*p3y&-zdmsb_^70zr^7gkoalc+#w9*w9p=khz#c*qo&
+      - DEBUG=0
+      - EMAIL_HOST=smtp.mailtrap.io
+      - EMAIL_HOST_USER=a05b7e40791ae7
+      - EMAIL_HOST_PASSWORD=ac215babb21f4f
+      - EMAIL_PORT=2525
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    ports:
+      - "5433:5432"
+    hostname: postgres

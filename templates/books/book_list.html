@@ -1,0 +1,15 @@
+{% extends '_base.html' %}
+
+{% block title %}Books{% endblock title %}
+
+{% block content %}    
+    <div class="col2 col">
+        <h2>Available Books</h2>
+            <a href="{% url 'book_new' %}"><b style="color: blue; margin-left: 10px;">+</b> Add your book</a>
+            <table class="instructions" style="margin-top: 13px">
+                {% for book in book_list %}
+                    <tr><td><p class="number">*</p></td><td class="instruction_step"><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td></tr>
+                {% endfor %}
+            </table>
+    </div>
+{% endblock content %}

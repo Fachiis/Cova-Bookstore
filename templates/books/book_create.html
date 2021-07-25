@@ -1,0 +1,48 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}New Book{% endblock title %}
+
+{% block content %}
+<div class="col2 col">
+    <h2>Create New Book 4 Sales</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+        {% endfor %}
+        <div>
+            {{ form.title.error }}
+            {{ form.title|as_crispy_field }}
+        </div>
+        <div>
+            {{ form.author.error }}
+            {{ form.author|as_crispy_field }}
+        </div>
+        <div>
+            {{ form.price.error }}
+            {{ form.price|as_crispy_field }}
+        </div>
+        <div>
+            <div class="mg-b-2 text-muted">
+                <i class="far fa-images" style="font-size: 20px;"></i>
+                <input class="inputfile" id="file" name="cover" onchange="upload_img(this);" type="file"/>
+                <label for="file"><span>Upload book cover image</span></label>
+            </div>
+        </div>
+        {% if not form.cover.url %}
+        <div style="margin-bottom: 20px;">
+            <img class="center" id="img_id" src="{% static 'images/no_image.jpg' %}"
+                 style="display: block; border-radius: 25px; width: 50%; "/>
+        </div>
+        {% else %}
+        <div style="margin-bottom: 20px;">
+            <img id="img_id" src="{{ form.cover.url }}" style="display: block; border-radius: 25px; width: 50%; "/>
+        </div>
+        {% endif %}
+        <button class="btn btn-primary" type="submit">Create</button>
+    </form>
+</div>
+{% endblock content %}
