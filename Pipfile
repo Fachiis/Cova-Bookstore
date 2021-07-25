@@ -13,6 +13,7 @@ stripe = "*"
 whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
+django-heroku = "*"
 
 [dev-packages]
 

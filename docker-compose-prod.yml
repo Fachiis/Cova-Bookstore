@@ -8,7 +8,7 @@ services:
     environment:
       - ENVIRONMENT=production
       - SECRET_KEY=^&sstl4*p3y&-zdmsb_^70zr^7gkoalc+#w9*w9p=khz#c*qo&
-      - DEBUG=1
+      - DEBUG=0
       - EMAIL_HOST=smtp.mailtrap.io
       - EMAIL_HOST_USER=a05b7e40791ae7
       - EMAIL_HOST_PASSWORD=ac215babb21f4f
