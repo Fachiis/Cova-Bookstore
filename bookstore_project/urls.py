@@ -19,13 +19,13 @@ from django.conf.urls.static import static
 from django.urls import path, include
 
 urlpatterns = [
-                  # Django admin
-                  path('boss-control/', admin.site.urls),
+    # Django admin
+    path('boss-control/', admin.site.urls),
 
-                  # User management using django-allauth
-                  path('accounts/', include('allauth.urls')),
+    # User management using django-allauth
+    path('accounts/', include('allauth.urls')),
 
-                  # Local apps
-                  path('', include('pages.urls')),
-                  path('books/', include('books.urls')),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # Local apps
+    path('', include('pages.urls')),
+    path('books/', include('books.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
