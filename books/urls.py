@@ -1,3 +1,6 @@
+    """
+    Create a uniform resource locator for book, review and search map
+    """
 from django.urls import path
 
 from .views import BookListView, BookDetailView, BookDeleteView, BookUpdateView, SearchResultView
