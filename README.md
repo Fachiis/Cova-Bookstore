@@ -1,6 +1,6 @@
 ****Cova Bookstore Application****
 -
-> This is an online bookstore application that allows registered authors of books to upload their books to the public for ease of purchase.
+> This is an online bookstore application that allows registered authors of books to upload their books to the public for ease of purchase. This is a robust e-commerce platform.
 ## Features
 
 - Django 3.2, Python 3.7, Docker 3.7, Django-allauth 0.45.0, Strip 2.60.0, & Paystack
